@@ -1,14 +1,7 @@
 mod one;
 
-pub mod days {
-    use crate::days::one;
-    use crate::Puzzle;
+use crate::Puzzle;
 
-    enum DaysErrorKind {
-        CouldNotGetPuzzles,
-    }
-
-    fn get_days() -> Result<Vec<Box<Puzzle>>, DaysErrorKind> {
-        Ok(vec!(one::get()))
-    }
+pub(crate) fn get_days() -> Vec<Box<dyn Puzzle>> {
+    vec!(one::get())
 }

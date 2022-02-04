@@ -32,9 +32,13 @@ fn read_input_or_empty(path: &str) -> Option<String> {
 
 fn split_text_lines_to_i32(text: &str) -> Vec<i32> {
     text.split('\n')
-        .collect::<Vec<_>>()
-        .iter()
         .filter(|s| !s.is_empty())
         .map(|s| s.parse::<i32>().unwrap())
+        .collect::<Vec<_>>()
+}
+
+fn split_text_to_lines(text: &str) -> Vec<&str> {
+    text.split('\n')
+        .filter(|s| !s.is_empty())
         .collect::<Vec<_>>()
 }

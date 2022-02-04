@@ -6,8 +6,6 @@ struct DayOne {
 }
 
 impl DayOne {
-    /// Initialize an instance of DayOne
-    /// assumes input is in same relative dir
     fn init() -> Self {
         DayOne {
             name: String::from("Day One"),

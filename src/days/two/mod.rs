@@ -14,18 +14,18 @@ impl DayTwo {
     }
 }
 
-enum Ordinal {
+enum Direction {
     Forward,
     Up,
     Down
 }
 
-impl Ordinal {
+impl Direction {
     fn of(str_val: &str) -> Self {
         match str_val {
-            "up" => Ordinal::Up,
-            "down" => Ordinal::Down,
-            "forward" => Ordinal::Forward,
+            "up" => Direction::Up,
+            "down" => Direction::Down,
+            "forward" => Direction::Forward,
             _ => panic!("Unable to parse value {} into an Ordinal", str_val)
         }
     }
@@ -48,11 +48,11 @@ impl Puzzle for DayTwo {
             let parsed_instruction: Vec<&str> = instruction.split(' ').collect::<Vec<_>>();
             assert_eq!(parsed_instruction.len(), 2, "Could not parse instruction {}", instruction);
             let scalar_value: i32 = parsed_instruction.get(1).unwrap().parse::<i32>().unwrap();
-            let parsed_ordinal: Ordinal = Ordinal::of(parsed_instruction.get(0).unwrap());
-            match parsed_ordinal {
-                Ordinal::Up => depth = depth - scalar_value,
-                Ordinal::Down => depth = depth + scalar_value,
-                Ordinal::Forward => horizontal_position += scalar_value
+            let parsed_direction: Direction = Direction::of(parsed_instruction.get(0).unwrap());
+            match parsed_direction {
+                Direction::Up => depth = depth - scalar_value,
+                Direction::Down => depth = depth + scalar_value,
+                Direction::Forward => horizontal_position += scalar_value
             }
         }
         println!("\tOutput: {}", horizontal_position * depth);
@@ -71,11 +71,11 @@ impl Puzzle for DayTwo {
             let parsed_instruction: Vec<&str> = instruction.split(' ').collect::<Vec<_>>();
             assert_eq!(parsed_instruction.len(), 2, "Could not parse instruction {}", instruction);
             let scalar_value: i32 = parsed_instruction.get(1).unwrap().parse::<i32>().unwrap();
-            let parsed_ordinal: Ordinal = Ordinal::of(parsed_instruction.get(0).unwrap());
-            match parsed_ordinal {
-                Ordinal::Up => aim -= scalar_value,
-                Ordinal::Down => aim += scalar_value,
-                Ordinal::Forward => {
+            let parsed_direction: Direction = Direction::of(parsed_instruction.get(0).unwrap());
+            match parsed_direction {
+                Direction::Up => aim -= scalar_value,
+                Direction::Down => aim += scalar_value,
+                Direction::Forward => {
                     horizontal_position += scalar_value;
                     depth += aim * scalar_value;
                 }
